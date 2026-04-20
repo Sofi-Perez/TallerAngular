@@ -1,23 +1,48 @@
 <div class="container mt-4">
-  <h2>Series de televisión</h2>
-  <p>Total series: {{ series.length }}</p>
+  <h1>Series de televisión</h1>
 
-  <table class="table table-striped">
-    <thead class="table-dark">
-      <tr>
-        <th>#</th>
-        <th>Name</th>
-        <th>Channel</th>
-        <th>Seasons</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let serie of series">
-        <td>{{ serie.id }}</td>
-        <td>{{ serie.name }}</td>
-        <td>{{ serie.channel }}</td>
-        <td>{{ serie.seasons }}</td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="row">
+    <div class="col-8">
+      <table class="table table-striped">
+        <thead class="table-dark">
+          <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Channel</th>
+            <th>Seasons</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let serie of series">
+            <td>{{ serie.id }}</td>
+            <td>
+              <a href="javascript:void(0)" (click)="onSelected(serie)">
+                {{ serie.name }}
+              </a>
+            </td>
+            <td>{{ serie.channel }}</td>
+            <td>{{ serie.seasons }}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p class="mt-2">
+        <strong>Seasons average:</strong> {{ averageSeasons }}
+      </p>
+    </div>
+
+    <div class="col-4" *ngIf="selectedSerie">
+      <div class="card">
+        <img
+          class="card-img-top"
+          [src]="selectedSerie.poster"
+          [alt]="selectedSerie.name"
+        />
+        <div class="card-body">
+          <h5 class="card-title">{{ selectedSerie.name }}</h5>
+          <p class="card-text">{{ selectedSerie.description }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
